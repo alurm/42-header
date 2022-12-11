@@ -43,10 +43,7 @@ for path; do
 
 	filePadding=$(padding '                                                   ' "$file")
 	byPadding=$(padding '                                       ' "$who" "$who" "$domain")
-	# createdPadding=$(padding '                  ' "$who")
-	# updatedPadding=$(padding '                 ' "$who")
 	createdPadding=$(padding '                                     ' "$created" "$who")
-	# createdPadding=$(padding "${created}${who}")
 	updatedPadding=$(padding '                                    ' "$updated" "$who")
 
 	firstLineContent='/* ************************************************************************** */'

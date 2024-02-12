@@ -21,3 +21,5 @@ Installation option
 	Run ``chmod +x path/to/header_42''.
 
 License: MIT.
+
+Bugs: since this script is not self-contained, it's hard to install.

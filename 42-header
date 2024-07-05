@@ -1,4 +1,5 @@
-# Copyright (c) 2021, 2022 Alan Urmancheev <alan.urman@gmail.com>
+#!/bin/sh
+# Copyright (c) 2021, 2022, 2024 Alan Urmancheev <alan.urman@gmail.com>
 #
 # Permission to use, copy, modify, and distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
 #
@@ -23,7 +24,45 @@ domain=student.$(hostname | rev | cut -f-2 -d. | rev)
 
 set -eu
 
-. "$(dirname "$0")/library.sh"
+prog=$(basename "$0")
+
+dateFormat='+%Y/%m/%d %T'
+
+statBirthFlags='-f %B'
+dateEpochFlagsPrefix='-r ' # Space is significant.
+if [ "$(uname)" = Linux ]; then
+	statBirthFlags='-c %W'
+	dateEpochFlagsPrefix='-d @'
+fi
+
+usage () {
+	echo "Usage: $prog path ..."
+	exit 1
+}
+
+len () {
+	printf %s "$1" | wc -c
+}
+
+nBlanks () {
+	printf '%*s' "$1" ' '
+}
+
+padding () {
+	nBlanks=$(len "$1"); shift
+	for arg; do
+		nBlanks=$((nBlanks - $(len "$arg")))
+	done
+	if [ "$nBlanks" -lt 0 ]; then
+		echo "$prog": padding: not enough space >&2
+		exit 1
+	fi
+	nBlanks "$nBlanks"
+}
+
+hasHeader () { # The test is not fully correct for the sake of simplicity.
+	sed 1q "$1" | grep -qF "$firstLineContent"
+}
 
 if [ "$#" -eq 0 ]; then
 	usage

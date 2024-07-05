@@ -1,25 +1,7 @@
-Header 42
+This script prepends 42 headers to given files. Files don't have to be empty, but may be. If a file doesn't exist, it is created.
 
-Screenshot in located in file: screenshot.png.
+Usage: 42-header path [...]
 
-Prepend School 42 header to files.
-
-File may contain something, be empty or not exist at all.
-
-Customize ``who'' and ``domain'' variables in file.sh to suit you needs.
-
-Run ``sh check.sh'' to launch shellcheck.
-
-Usage: header_42 path ...
-
-Installation option
-
-	Create a script called ``header_42'' somewhere in you path the with following content:
-		#!/usr/bin/env sh
-		exec sh path/to/this/file.sh "$@"
-
-	Run ``chmod +x path/to/header_42''.
+``who'' and ``domain'' variables can be set to suit user's needs.
 
 License: MIT.
-
-Bugs: since this script is not self-contained, it's hard to install.
